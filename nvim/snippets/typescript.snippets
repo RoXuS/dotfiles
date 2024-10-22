@@ -1,0 +1,53 @@
+snippet pa "A long browser pause"
+	await browser.pause(1000000);
+
+snippet up "Updated lit-element"
+	protected override updated(properties: PropertyValues) {
+		if (properties.has('')) {
+			// 
+		}
+	}
+
+snippet fu "First updated lit-element"
+	protected override firstUpdated(properties: PropertyValues) {
+		// 
+	}
+
+snippet re "Mobx reaction"
+	reaction(
+		() => this,
+		() => {
+			// 
+		}
+	);
+
+snippet style "Component styles"
+  public static get styles() {
+    const componentStyle = css`
+      :host {
+        display: block;
+      }
+    `;
+    return [componentStyle, dtFlexLayoutAlignTheme, dtFlexLayoutTheme];
+  }
+
+snippet prop "Component state"
+  @property({ type: String }) public prop?: string;
+
+snippet state "Component property"
+  @state() private opened?: boolean = false;
+
+snippet initTest "Init wdio test"
+	import { html, render } from 'lit';
+
+	describe('dt-component', () => {
+		afterEach(() => {
+			document.querySelector('dt-component')?.remove();
+		});
+		it('normal component', async () => {
+			const fixtureData = html\`
+				<dt-component></dt-component>
+			\`;
+			render(fixtureData, document.body);
+		});
+	});
