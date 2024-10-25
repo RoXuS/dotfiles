@@ -49,6 +49,27 @@ wezterm.on(
 )
 
 return {
+  audible_bell = "Disabled",
+  mouse_bindings = {
+    -- Disable the default click behavior
+    {
+      event = { Up = { streak = 1, button = "Left" } },
+      mods = "NONE",
+      action = wezterm.action.DisableDefaultAssignment,
+    },
+    -- Bind 'Up' event of CTRL-Click to open hyperlinks
+    {
+      event = { Up = { streak = 1, button = 'Left' } },
+      mods = 'SUPER',
+      action = wezterm.action.OpenLinkAtMouseCursor,
+    },
+    -- Disable the 'Down' event of CTRL-Click to avoid weird program behaviors
+    {
+      event = { Down = { streak = 1, button = 'Left' } },
+      mods = 'SUPER',
+      action = wezterm.action.Nop,
+    },
+  },
   color_scheme = scheme_for_appearance(),
   use_fancy_tab_bar = false,
   window_padding = {
