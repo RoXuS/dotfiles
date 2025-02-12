@@ -2,10 +2,11 @@ return {
   'neovim/nvim-lspconfig',
   config = function()
     local lspconfig = require('lspconfig')
+    local root_dir = vim.fn.getcwd()
     lspconfig.ts_ls.setup({
       root_dir = function(filename)
         if (lspconfig.util.root_pattern("package.json")(filename) or lspconfig.util.root_pattern("tsconfig.json")(filename)) then
-          return lspconfig.util.find_git_ancestor(filename)
+          return vim.fs.root(root_dir, ".git")
         end
       end,
       single_file_support = false,
@@ -27,7 +28,11 @@ return {
     lspconfig.pyright.setup({})
     lspconfig.stylelint_lsp.setup({
       filetypes = { "typescript" },
-      root_dir = lspconfig.util.root_pattern("package.json", ".git"),
+      root_dir = function(filename)
+        if (lspconfig.util.root_pattern("package.json")(filename) or lspconfig.util.root_pattern("tsconfig.json")(filename)) then
+          return vim.fs.root(root_dir, ".git")
+        end
+      end,
       settings = {
         stylelintplus = {
           autoFixOnSave = true,
@@ -78,10 +83,6 @@ return {
         elseif (lspconfig.util.root_pattern("eslint.config.mjs")(filename)) then
           return lspconfig.util.root_pattern("eslint.config.mjs")(filename)
         end
-
-        -- if (lspconfig.util.root_pattern("package.json")(filename) or lspconfig.util.root_pattern("tsconfig.json")(filename)) then
-        --   return lspconfig.util.find_git_ancestor(filename)
-        -- end
       end
     }
     lspconfig.lua_ls.setup {
@@ -126,6 +127,16 @@ return {
         nmap('gi', vim.lsp.buf.implementation, 'Go to implementations')
         nmap('gh', vim.lsp.buf.hover, 'Signature help')
         nmap('gr', vim.lsp.buf.references, 'Go to references')
+
+        -- nmap(
+        --   "<leader>xa",
+        --   function()
+        --     for _, client in ipairs(vim.lsp.get_clients()) do
+        --       require("workspace-diagnostics").populate_workspace_diagnostics(client, 0)
+        --     end
+        --   end,
+        --   "Toggle Flash Search"
+        -- )
         -- nmap('<space>wa', vim.lsp.buf.add_workspace_folder, 'Add to workspace')
         -- nmap('<space>wr', vim.lsp.buf.remove_workspace_folder, 'Remove from workspace')
         -- nmap('<space>wl', function()
@@ -133,5 +144,5 @@ return {
         -- end, 'List workspace folders')
       end,
     })
-  end
+  end,
 }

@@ -78,6 +78,7 @@ return {
     top = 0,
     bottom = 0,
   },
+  notification_handling = "NeverShow",
   show_tab_index_in_tab_bar = false,
   show_new_tab_button_in_tab_bar = false,
   tab_bar_at_bottom = true,

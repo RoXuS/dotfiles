@@ -25,7 +25,7 @@ return {
         telescope = {
           enabled = true,
           style = "nvchad"
-        }
+        },
       }
     })
     require("barbecue").setup {
