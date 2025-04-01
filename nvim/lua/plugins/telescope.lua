@@ -57,6 +57,8 @@ return {
           n = {
             ["<C-w>"] = actions.send_selected_to_qflist + actions.open_qflist,
             ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+            ["<C-u>"] = actions.cycle_history_prev,
+            ["<C-j>"] = actions.cycle_history_next,
           },
         },
       },
