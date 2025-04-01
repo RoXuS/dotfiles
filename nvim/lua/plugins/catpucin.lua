@@ -7,6 +7,7 @@ return {
     require("catppuccin").setup({
       default_integrations = true,
       integrations = {
+        copilot_vim = true,
         barbar = true,
         barbecue = {
           dim_dirname = true,
