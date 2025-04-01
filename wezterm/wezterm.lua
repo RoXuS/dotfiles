@@ -91,6 +91,11 @@ return {
   send_composed_key_when_left_alt_is_pressed = true,
   keys = {
     {
+      key = 'r',
+      mods = 'CMD|SHIFT',
+      action = wezterm.action.ReloadConfiguration,
+    },
+    {
       key = "i",
       mods = "LEADER",
       action = wezterm.action.QuickSelectArgs({
