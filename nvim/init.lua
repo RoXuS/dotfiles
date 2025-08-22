@@ -13,6 +13,11 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = ' '
 
+-- globals
+command = vim.api.nvim_create_user_command
+ag = vim.api.nvim_create_augroup
+au = vim.api.nvim_create_autocmd
+
 require "utils"
 require "keymaps"
 require "options"

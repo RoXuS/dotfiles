@@ -1,14 +1,37 @@
 return {
   'neovim/nvim-lspconfig',
   config = function()
+    local configs = require 'lspconfig.configs'
     local lspconfig = require('lspconfig')
     local root_dir = vim.fn.getcwd()
+
+    -- if not configs.cem_lsp then
+    --   configs.cem_lsp = {
+    --     default_config = {
+    --       cmd = { 'cem', 'lsp' },
+    --       root_dir = function(filename)
+    --         if (lspconfig.util.root_pattern("package.json")(filename) or lspconfig.util.root_pattern("tsconfig.json")(filename)) then
+    --           return vim.fs.root(root_dir, ".git")
+    --         end
+    --       end,
+    --       filetypes = { 'html', 'typescript', 'javascript' },
+    --       -- Control debug logging via LSP trace levels
+    --       trace = 'off', -- 'off' | 'messages' | 'verbose'
+    --     },
+    --   }
+    -- end
+    -- lspconfig.cem_lsp.setup {}
     lspconfig.ts_ls.setup({
       root_dir = function(filename)
         if (lspconfig.util.root_pattern("package.json")(filename) or lspconfig.util.root_pattern("tsconfig.json")(filename)) then
           return vim.fs.root(root_dir, ".git")
         end
       end,
+      -- cmd = { "/opt/homebrew/bin/typescript-language-server", "--stdio", "--log-level", "4" },
+      -- init_options = {
+      --   hostInfo = "neovim",
+      --   logVerbosity = "verbose",
+      -- },
       single_file_support = false,
       settings = {
         workingDirectory = { mode = 'location' },

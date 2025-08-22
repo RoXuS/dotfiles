@@ -16,6 +16,7 @@ return {
     "dhruvmanila/browser-bookmarks.nvim",
     { 'kkharji/sqlite.lua', module = 'sqlite' },
     "AckslD/nvim-neoclip.lua",
+    "princejoogie/dir-telescope.nvim"
   },
   config = function()
     local actions = require('telescope.actions')
@@ -103,6 +104,13 @@ return {
         }
       }
     }
+    require("dir-telescope").setup({
+      -- these are the default options set
+      hidden = true,
+      no_ignore = false,
+      show_preview = true,
+      follow_symlinks = false,
+    })
     require('neoclip').setup()
     require('browser_bookmarks').setup {
       selected_browser = 'chrome'
@@ -110,11 +118,23 @@ return {
     require('telescope').load_extension('luasnip')
     require("telescope").load_extension("advanced_git_search")
     require("telescope").load_extension('cmdline')
+    require("telescope").load_extension("scope")
     require("telescope").load_extension("undo")
     require('telescope').load_extension('bookmarks')
     require("telescope").load_extension("zf-native")
+    require("telescope").load_extension("dir")
   end,
   keys = {
+    {
+      '<leader>fdg',
+      "<cmd>Telescope dir live_grep<CR>",
+      desc = 'Grep in directory'
+    },
+    {
+      '<leader>fdf',
+      "<cmd>Telescope dir find_files<CR>",
+      desc = 'Grep in directory'
+    },
     { ':', '<cmd>Telescope cmdline<cr>', desc = 'Cmdline' },
     {
       '<leader>ff',
@@ -171,6 +191,11 @@ return {
         require("telescope").extensions.neoclip.default()
       end,
       desc = 'See yank history'
+    },
+    {
+      "<leader>ft",
+      "<cmd>Telescope scope buffers<cr>",
+      desc = "Show tabs and buffers",
     },
     {
       "<leader>fu",

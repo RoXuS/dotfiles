@@ -2,6 +2,12 @@
 return {
   "tiagovla/scope.nvim",
   config = function()
+    -- init.lua
+    vim.opt.sessionoptions = { -- required
+      "buffers",
+      "tabpages",
+      "globals",
+    }
     require("scope").setup {
       hooks = {
         pre_tab_leave = function()

@@ -16,6 +16,11 @@ local function run_eslint()
   local cache_flag = eslint.config.cache and '--cache' or ''
   local cache_location_flag = eslint.config.cache_location and ('--cache-location ' .. eslint.config.cache_location) or
       ''
+  -- Print for debugging
+  -- print('Running ESLint in directory:', target_dir)
+  -- print('Cache flag:', cache_flag)
+  -- print('Cache location flag:', cache_location_flag)
+  -- print('Root dir', root_dir)
   local cmd = string.format('npx eslint --quiet --format json %s %s %s', target_dir, cache_flag, cache_location_flag)
 
   -- Persistent notification ID

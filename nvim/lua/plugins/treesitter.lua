@@ -4,7 +4,9 @@ return {
   build = ':TSUpdate',
   config = function()
     local parser_install_dir = vim.fn.expand '~/.local/share/treesitter';
+
     vim.opt.runtimepath:append(parser_install_dir)
+
     require 'nvim-treesitter.configs'.setup {
       parser_install_dir = parser_install_dir,
       highlight = {
@@ -19,6 +21,7 @@ return {
       },
       ensure_installed = {
         'html',
+        'query',
         'dockerfile',
         'json',
         'lua',
@@ -28,6 +31,7 @@ return {
         'regex',
         'typescript',
         'yaml',
+        'styled'
       },
       incremental_selection = {
         enable = false,
