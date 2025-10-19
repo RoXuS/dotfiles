@@ -11,7 +11,10 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- vim.lsp.set_log_level("debug")
+
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
 
 -- globals
 command = vim.api.nvim_create_user_command

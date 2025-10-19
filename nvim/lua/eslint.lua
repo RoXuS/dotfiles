@@ -42,6 +42,8 @@ local function run_eslint()
         -- Parse ESLint output
         local success, results = pcall(vim.fn.json_decode, table.concat(data, ''))
         if not success then
+          -- Add logging for debugging
+          print("ESLint output:", table.concat(data, ''), target_dir, cache_flag)
           notify('Failed to parse ESLint output.', 'error', {
             title = 'ESLint',
             replace = notify_id,
