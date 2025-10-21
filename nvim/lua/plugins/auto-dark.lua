@@ -12,4 +12,11 @@ return {
       vim.cmd("colorscheme catppuccin-latte")
     end,
   },
+  init = function()
+    -- Si pas d'environnement graphique, utiliser le mode sombre par défaut
+    if vim.fn.has("gui_running") == 0 and os.getenv("DISPLAY") == nil then
+      vim.opt.background = "dark"
+      vim.cmd("colorscheme catppuccin-frappe")
+    end
+  end,
 }
