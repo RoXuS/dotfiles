@@ -5,8 +5,11 @@ return {
     'shumphrey/fugitive-gitlab.vim'
   },
   config = function()
-    vim.g.fugitive_gitlab_domains = {
-      [os.getenv("GITLAB_HOSTNAME")] = 'https://' .. os.getenv("GITLAB_HOSTNAME"),
-    }
+    local gitlab_hostname = os.getenv("GITLAB_HOSTNAME")
+    if gitlab_hostname then
+      vim.g.fugitive_gitlab_domains = {
+        [gitlab_hostname] = 'https://' .. gitlab_hostname,
+      }
+    end
   end,
 }
